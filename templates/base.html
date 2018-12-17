@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"#}
-{#          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"#}
+    {#          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/bootstrap.css">
     <title>Hello, world!</title>
 
     <style>
-{#        body {#}
-{#            padding: 5px 0px;#}
-{#        }#}
+        {#        body {#}
+        {#            padding: 5px 0px;#}
+        {#        }#}
 
         .full-ht {
             height: 48vh;
@@ -29,58 +30,57 @@
             height: 100%;
             vertical-align: middle;
         }
-{#        .full-ht-content {#}
-{#            position: absolute;#}
-{#            top: 0;#}
-{#            bottom: 0;#}
-{#            width: 100%;#}
-{#            margin-left: -15px;#}
-{#            padding-left: 15px;#}
-{#        }#}
+
+        {#        .full-ht-content {#}
+        {#            position: absolute;#}
+        {#            top: 0;#}
+        {#            bottom: 0;#}
+        {#            width: 100%;#}
+        {#            margin-left: -15px;#}
+        {#            padding-left: 15px;#}
+        {#        }#}
     </style>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row full-ht">
-        <div class="col full-ht">
-                <button onclick="window.location='/?play=hi';" class="btn btn-block btn-primary">
-                    <i class="fa fa-2x fa-play"></i>
+        {% for category in music_library.get_categories() %}
+            <div class="col-3 full-ht">
+                <button onclick="window.location='/?play={{ category }}';" class="btn btn-block btn-primary">
+                    {{ category }}
                 </button>
-        </div>
-        <div class="col full-ht">
+            </div>
+        {% endfor %}
+
+            <div class="col-3 full-ht">
+                <button onclick="window.location='/?play=all';" class="btn btn-block btn-primary">
+                    Play Random
+                </button>
+            </div>
+
+        {% if not music_library.stopped %}
+            <div class="col-3 full-ht">
+                <button onclick="window.location='/?stop=True';" class="btn btn-block btn-primary">
+                    <i class="fa fa-2x fa-stop"></i>
+                </button>
+            </div>
+        {% endif %}
+        {% if not (music_library.stopped or music_library.paused) %}
+            <div class="col-3 full-ht">
                 <button onclick="window.location='/?pause=True';" class="btn btn-block btn-primary">
                     <i class="fa fa-2x fa-pause"></i>
                 </button>
-        </div>
-        <div class="col full-ht">
+            </div>
+        {% endif %}
+        {% if music_library.paused %}
+            <div class="col-3 full-ht">
                 <button onclick="window.location='/?resume=True';" class="btn btn-block btn-primary">
                     <i class="fa fa-2x fa-play-circle"></i>
                 </button>
-        </div>
-        <div class="col full-ht">
-                <button href="#" class="btn btn-block btn-primary">HI</button>
-        </div>
+            </div>
+        {% endif %}
     </div>
-    <div class="row full-ht">
-        <div class="col full-ht">
-                <button href="#" class="btn btn-block btn-primary">HI</button>
-        </div>
-        <div class="col full-ht">
-            <div class="full-ht-content">
-                BLA
-            </div>
-        </div>
-        <div class="col full-ht">
-            <div class="full-ht-content">
-                BLA
-            </div>
-        </div>
-        <div class="col full-ht">
-            <div class="full-ht-content">
-                BLA
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <!-- Optional JavaScript -->
@@ -94,5 +94,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+<script type="text/JavaScript">
+    <!--
+    function AutoRefresh(t) {
+        setTimeout("location.reload(true);", t);
+    }
+    AutoRefresh(10000);
+    //-->
+</script>
+
 </body>
 </html>

@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request
-import pygame
-import os
+from flask import Flask, render_template, request, redirect
+from musiclib import MusicLibrary
 
-pygame.mixer.init(buffer=1024)
+
 app = Flask(__name__)
 
-if os.name != 'nt':
-    pygame.init()
+
+music_library = MusicLibrary()
+music_library.start()
+jukebox_dict = {}
 
 
 @app.route('/')
@@ -14,30 +15,20 @@ def index():
     play = request.args.get('play', None)
     pause_flag = request.args.get('pause', False)
     resume_flag = request.args.get('resume', False)
+    stop_flag = request.args.get('stop', False)
 
     if play:
-        play_something()
+        music_library.play_category(play)
     elif pause_flag:
-        pause_music()
+        music_library.pause()
     elif resume_flag:
-        resume_music()
+        music_library.resume()
+    elif stop_flag:
+        music_library.stop()
+    else:
+        return render_template('base.html', music_library=music_library)
 
-    return render_template('base.html')
-
-
-def pause_music():
-    pygame.mixer.music.pause()
-
-
-def play_something():
-    file = '/home/pi/sample.mp3'
-    pygame.mixer.music.load(file)
-    pygame.mixer.music.play()
-    pygame.mixer.music.set_volume(1.0)
-
-
-def resume_music():
-    pygame.mixer.music.unpause()
+    return redirect('/')
 
 
 if __name__ == '__main__':
