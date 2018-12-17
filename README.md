@@ -1,7 +1,7 @@
-= FlaskJukeBox =
+# FlaskJukeBox
 
 
-== Raspberry Pi stuff ==
+## Raspberry Pi stuff 
 To auto start chrome and point it to FlaskJukeBox, add the following lines to /home/pi/.config/lxsession/LXDE-pi/autostart (tested on pi3):
 ```
 @amixer set PCM -- -100
