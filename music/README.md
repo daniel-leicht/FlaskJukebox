@@ -1,1 +1,1 @@
-Create sub-folders here and fill them with MP3 files
+Create sub-folders here and populate them with MP3 files
