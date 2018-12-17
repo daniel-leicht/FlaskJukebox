@@ -1,6 +1,8 @@
 # FlaskJukebox
 Python/Flask web based MP3 library player, excellent for RaspberryPi based jukeboxes.
 
+![FlaskJukeBox on RPi](https://i.imgur.com/nYxdhvN.jpg "FlaskJukebox on RaspberryPi with a 3.5inch touchscreen")
+
 ## Raspberry Pi stuff 
 To auto start chrome and point it to FlaskJukeBox, add the following lines to /home/pi/.config/lxsession/LXDE-pi/autostart (tested on pi3):
 ```
