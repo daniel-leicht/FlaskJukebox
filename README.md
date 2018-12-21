@@ -1,5 +1,6 @@
 # FlaskJukebox
 Python/Flask web based MP3 library player, excellent for RaspberryPi based jukeboxes.
+(FlaskJukebox was tested and works with Python 3)
 
 ![FlaskJukeBox on RPi](https://i.imgur.com/nYxdhvN.jpg "FlaskJukebox on RaspberryPi with a 3.5inch touchscreen")
 
